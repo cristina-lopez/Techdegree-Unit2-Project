@@ -101,29 +101,52 @@ function addSearch() {
 
 addSearch();
 
-function searchName(searchInput, names){
+/*
+`searchName` function
+This function helps search through the names and returns an array with names that match the search input
+*/
+/* function searchName(searchInput, names){
    for (let i = 0; i < names.length; i++) {
-      names[i].className.remove('match');
+      names[i].style.display = 'flex';
       var checkName = names[i].textContent.toLowerCase();
-      if (searchInput.value.length !== 0 && checkName.includes(searchInput.value.toLowerCase())) {
-        names[i].className = 'match';
-    }
+      if (searchInput.value.length !== 0 && checkName === searchInput.value.toLowerCase()) {
+         names[i].style.display = 'flex';
+      } else {
+         names[i].style.display = 'none';
+      }
   }
-}
 
-const dataNames = [];
-for (let i=0; i<data.length; i++) {
-   dataNames[i] = data[i].name.first + data[i].name.last;
-}
+} */
 
-button = document.querySelector('button');
-input = document.querySelector('input');
+const button = document.querySelector('button');
+const input = document.querySelector('input').value;
 
 button.addEventListener('click', (e) => {
    e.preventDefault();
-   searchName(input, dataNames);
+   var dataNames = document.querySelectorAll('.student-item');
+   for (let i = 0; i < dataNames.length; i++) {
+      //dataNames[i].style.display = 'flex';
+      var checkName = document.querySelectorAll('.student-details')[i].childNodes[3].textContent.toLowerCase();
+      if (input.length !== 0 && checkName.includes(input.toLowerCase())) {
+         dataNames[i].style.display = 'flex';
+      } else {
+         dataNames[i].style.display = 'none';
+      }
+      //return dataNames;
+  }
+
+  //return dataNames;
+
+
+   //searchName(input, dataNames);
+   showPage(dataNames, 1);
+   //addPagination(dataNames);
 });
 
-button.addEventListener('keyup', (e) => {
+/* input.addEventListener('keyup', (e) => {
+   e.preventDefault();
+   var dataNames = document.querySelectorAll('.student-item');
    searchName(input, dataNames);
-});
+   showPage(dataNames, 1);
+   addPagination(dataNames);
+}); */
