@@ -101,52 +101,40 @@ function addSearch() {
 
 addSearch();
 
-/*
-`searchName` function
-This function helps search through the names and returns an array with names that match the search input
-*/
-/* function searchName(searchInput, names){
-   for (let i = 0; i < names.length; i++) {
-      names[i].style.display = 'flex';
-      var checkName = names[i].textContent.toLowerCase();
-      if (searchInput.value.length !== 0 && checkName === searchInput.value.toLowerCase()) {
-         names[i].style.display = 'flex';
-      } else {
-         names[i].style.display = 'none';
-      }
-  }
 
-} */
 
 const button = document.querySelector('button');
-const input = document.querySelector('input').value;
 
 button.addEventListener('click', (e) => {
    e.preventDefault();
-   var dataNames = document.querySelectorAll('.student-item');
-   for (let i = 0; i < dataNames.length; i++) {
-      //dataNames[i].style.display = 'flex';
-      var checkName = document.querySelectorAll('.student-details')[i].childNodes[3].textContent.toLowerCase();
-      if (input.length !== 0 && checkName.includes(input.toLowerCase())) {
-         dataNames[i].style.display = 'flex';
-      } else {
-         dataNames[i].style.display = 'none';
+   const input_value = e.target.value.toLowerCase();
+
+   let filteredData = [];
+   for (let i = 0; i < data.length; i++) {
+      let dataName = `${data[i].name.first} ${data[i].name.last}`.toLowerCase();
+      if (dataName.includes(input_value)) {
+         filteredData.push(data[i]);
       }
-      //return dataNames;
-  }
+   }
 
-  //return dataNames;
-
-
-   //searchName(input, dataNames);
-   showPage(dataNames, 1);
-   //addPagination(dataNames);
+   showPage(filteredData, 1);
+   addPagination(filteredData);
 });
 
-/* input.addEventListener('keyup', (e) => {
+const input = document.querySelector('input');
+
+input.addEventListener('keyup', (e) => {
    e.preventDefault();
-   var dataNames = document.querySelectorAll('.student-item');
-   searchName(input, dataNames);
-   showPage(dataNames, 1);
-   addPagination(dataNames);
-}); */
+   const input_value = e.target.value.toLowerCase();
+
+   let filteredData = [];
+   for (let i = 0; i < data.length; i++) {
+      let dataName = `${data[i].name.first} ${data[i].name.last}`.toLowerCase();
+      if (dataName.includes(input_value)) {
+         filteredData.push(data[i]);
+      }
+   }
+
+   showPage(filteredData, 1);
+   addPagination(filteredData);
+}); 
