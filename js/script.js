@@ -2,6 +2,7 @@
 Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
+
 const itemsPerPage = 9;
 /*
 `showPage` function
@@ -41,7 +42,6 @@ function showPage(list, page) {
 `addPagination` function
 This function creates and inserts/appends the elements needed for the pagination buttons
 */
-
 function addPagination(list) {
    const numOfPages = Math.ceil(list.length/itemsPerPage);
 
@@ -101,14 +101,15 @@ function addSearch() {
 
 addSearch();
 
-
-
+/*
+Event Listeners to add functionality to search component
+*/
 const button = document.querySelector('button');
-
 button.addEventListener('click', (e) => {
    e.preventDefault();
-   const input_value = e.target.value.toLowerCase();
 
+   const input_value = e.target.value.toLowerCase();
+   //Creates an array with data that matches the inputValue
    let filteredData = [];
    for (let i = 0; i < data.length; i++) {
       let dataName = `${data[i].name.first} ${data[i].name.last}`.toLowerCase();
@@ -116,13 +117,18 @@ button.addEventListener('click', (e) => {
          filteredData.push(data[i]);
       }
    }
-
-   showPage(filteredData, 1);
-   addPagination(filteredData);
+   //If the inputValue does not match any names, "No results" is shown on the page
+   ul = document.querySelector('ul');
+   if (filteredData.length === 0) {
+      ul.innerHTML = `<h2>No Results Found</h2>`;
+      addPagination(filteredData);
+   } else {
+      showPage(filteredData, 1);
+      addPagination(filteredData);
+   }
 });
 
 const input = document.querySelector('input');
-
 input.addEventListener('keyup', (e) => {
    e.preventDefault();
    const input_value = e.target.value.toLowerCase();
@@ -134,7 +140,12 @@ input.addEventListener('keyup', (e) => {
          filteredData.push(data[i]);
       }
    }
-
-   showPage(filteredData, 1);
-   addPagination(filteredData);
+   ul = document.querySelector('ul');
+   if (filteredData.length === 0) {
+      ul.innerHTML = `<h2>No Results Found</h2>`;
+      addPagination(filteredData);
+   } else {
+      showPage(filteredData, 1);
+      addPagination(filteredData);
+   }
 }); 
